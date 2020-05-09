@@ -9,7 +9,11 @@ a button {
   position: relative;
   float: right;
   width: 45%;
+  border-left: solid 1px #777;
+  padding-left: 3%;
+  height: 100%;
 }
+
 #Login{
   position: fixed;
   top: 50%;
@@ -21,6 +25,7 @@ a button {
   background: #FFF;
   width: 70%;
   height: 70%;
+  
 }
 #info{
   position: relative;
@@ -98,5 +103,8 @@ button:hover{
 }
 
 
-
+#Erro{
+  font-size: 10pt;
+  color: rgb(206, 59, 59);
+}
 
