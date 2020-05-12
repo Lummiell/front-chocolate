@@ -1,20 +1,43 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./style.css";
 import {
   FiUser,
   FiLock,
-  FiArrowRightCircle,
-  FiChevronRight,
   FiLogIn,
   FiPlusSquare,
 } from "react-icons/fi";
+import {ScaleLoader} from 'react-spinners'
+import API from '../../Services/API'
+
+function ConteudoBotao(props){
+  
+  const Logando = props.Logando;
+  if(Logando){
+    return (<> <ScaleLoader height={'8pt'}/></>)
+  }
+  else{
+    return (<>Entrar <FiLogIn/></>)
+  }
+}
+
 function Login() {
-  const [usuario, setUsuario] = useState();
+  const [Usuario, setUsuario] = useState();
   const [Senha, setSenha] = useState();
   const [erro, setErro] = useState("");
-  const Logar = (e) => {
+  const history = useHistory();
+  const [Logando,setLogando] = useState(false);
+  const Logar = async(e) => {
     e.preventDefault();
+    setLogando(true);
+    const resposta = await API.post('/Login/GerarToken',{Usuario,Senha})
+    if(resposta.data.auth){
+      history.push('/Home');
+    }
+    else{
+      setLogando(false)
+      setErro('Erro de login. Verifique seus dados.');
+    }
   };
   return (
     <div id="Login">
@@ -65,7 +88,7 @@ function Login() {
             </li>
             <li>
               <button type="submit" id="enviar">
-                Entrar <FiLogIn />
+               <ConteudoBotao Logando={Logando}/>
               </button>
             </li>
             <li>
