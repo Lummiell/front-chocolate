@@ -1,23 +1,33 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import "./style.css";
+import { FiUser, FiLock, FiLogIn, FiPlusSquare } from "react-icons/fi";
+import { ScaleLoader } from "react-spinners";
+import API from "../../Services/API";
+import { LoginContainer, InfoContainer, LoginFormContainer } from "./styles";
 import {
-  FiUser,
-  FiLock,
-  FiLogIn,
-  FiPlusSquare,
-} from "react-icons/fi";
-import {ScaleLoader} from 'react-spinners'
-import API from '../../Services/API'
-
-function ConteudoBotao(props){
-  
+  Button,
+  TextInput,
+  ButtonForm,
+  Form,
+  ItensForm,
+  ErrorText,
+  LabelInput,
+} from "../../globalstyles";
+function ConteudoBotao(props) {
   const Logando = props.Logando;
-  if(Logando){
-    return (<> <ScaleLoader height={'8pt'}/></>)
-  }
-  else{
-    return (<>Entrar <FiLogIn/></>)
+  if (Logando) {
+    return (
+      <>
+        {" "}
+        <ScaleLoader height={"8pt"} />
+      </>
+    );
+  } else {
+    return (
+      <>
+        Entrar <FiLogIn />
+      </>
+    );
   }
 }
 
@@ -26,47 +36,45 @@ function Login() {
   const [Senha, setSenha] = useState();
   const [erro, setErro] = useState("");
   const history = useHistory();
-  const [Logando,setLogando] = useState(false);
-  const Logar = async(e) => {
+  const [Logando, setLogando] = useState(false);
+  const Logar = async (e) => {
     e.preventDefault();
     setLogando(true);
-    const resposta = await API.post('/Login/GerarToken',{Usuario,Senha})
-    if(resposta.data.auth){
-      history.push('/Home');
-    }
-    else{
-      setLogando(false)
-      setErro('Erro de login. Verifique seus dados.');
+    const resposta = await API.post("/Login/GerarToken", { Usuario, Senha });
+    if (resposta.data.auth) {
+      localStorage.setItem('@token',resposta.data.token)
+      history.push("/Home");
+    } else {
+      setLogando(false);
+      setErro("Erro de login. Verifique seus dados.");
     }
   };
   return (
-    <div id="Login">
-      <div id="info">
-        <div id='TituloDesc'>
-          <h1>Amigo chocolate 🍫</h1>
-          <p>Pra você que é generoso ou não.</p>
-          <p>Faça sua conta já!</p>
-        </div>
-        <div id='Conta'>
-          <Link to="/NovoUsuario">
-            <button>
-              Novo usuário <FiPlusSquare />
-            </button>
-          </Link>
-        </div>
-      </div>
-      <div id="formLogin">
+    <LoginContainer>
+      <InfoContainer>
+        <h1>Amigo chocolate 🍫</h1>
+        <p>Pra você que é generoso ou não.</p>
+        <p>Faça sua conta já!</p>
+        <Button
+          onClick={() => {
+            history.push("/NovoUsuario");
+          }}
+        >
+          Novo usuário <FiPlusSquare />
+        </Button>
+      </InfoContainer>
+      <LoginFormContainer>
         <h2>Já tem uma conta? Faça login!</h2>
-        <form action="post" onSubmit={Logar}>
+        <Form action="post" onSubmit={Logar}>
           <legend>Entre com os seus dados</legend>
-          <ul>
+          <ItensForm>
             <li>
-              <label for="Usuario">
+              <LabelInput htmlFor="Usuario">
                 <FiUser /> Usuário
-              </label>
+              </LabelInput>
             </li>
             <li>
-              <input
+              <TextInput
                 onChange={(e) => setUsuario(e.target.value)}
                 type="text"
                 id="Usuario"
@@ -74,12 +82,12 @@ function Login() {
               />
             </li>
             <li>
-              <label for="Senha">
+              <LabelInput htmlFor="Senha">
                 <FiLock /> Senha
-              </label>
+              </LabelInput>
             </li>
             <li>
-              <input
+              <TextInput
                 onChange={(e) => setSenha(e.target.value)}
                 type="password"
                 name="Senha"
@@ -87,17 +95,17 @@ function Login() {
               />
             </li>
             <li>
-              <button type="submit" id="enviar">
-               <ConteudoBotao Logando={Logando}/>
-              </button>
+              <ButtonForm type="submit">
+                <ConteudoBotao Logando={Logando} />
+              </ButtonForm>
             </li>
             <li>
-              <p id="Erro">{erro}</p>
+              <ErrorText id="Erro">{erro}</ErrorText>
             </li>
-          </ul>
-        </form>
-      </div>
-    </div>
+          </ItensForm>
+        </Form>
+      </LoginFormContainer>
+    </LoginContainer>
   );
 }
 export default Login;
