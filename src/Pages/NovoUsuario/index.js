@@ -50,7 +50,7 @@ function NovoUsuario() {
     e.preventDefault();
     setEnviando(true);
     try {
-      const resposta = await API.post("/Alunos", {
+      await API.post("/Alunos", {
         Nome,
         Email,
         Observacoes: null,
@@ -60,7 +60,7 @@ function NovoUsuario() {
       history.push('/');
     } catch (error) {
       setEnviando(false)
-      if(error.response.status==422){
+      if(error.response.status===422){
         setErro('Erro de validação de dados')
       }
     }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { FiUser, FiLock, FiLogIn, FiPlusSquare } from "react-icons/fi";
 import { ScaleLoader } from "react-spinners";
 import API from "../../Services/API";
@@ -43,6 +43,7 @@ function Login() {
     const resposta = await API.post("/Login/GerarToken", { Usuario, Senha });
     if (resposta.data.auth) {
       localStorage.setItem('@token',resposta.data.token)
+      localStorage.setItem('@userid',resposta.data.userid)
       history.push("/Home");
     } else {
       setLogando(false);
@@ -52,7 +53,8 @@ function Login() {
   return (
     <LoginContainer>
       <InfoContainer>
-        <h1>Amigo chocolate 🍫</h1>
+        <h1>Amigo chocolate <span role="img" aria-label="Chocolate">🍫</span></h1>
+        
         <p>Pra você que é generoso ou não.</p>
         <p>Faça sua conta já!</p>
         <Button
