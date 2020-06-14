@@ -19,7 +19,7 @@ function Home() {
   
   return (
     <div>
-      <h1>Bem vindo, {Usuario}!</h1>
+      <h1>Bem vindo(a)!</h1>
       <Button
         onClick={() => {
           history.push("/EditarPerfil");
@@ -31,7 +31,7 @@ function Home() {
       
       <h2>Seus Grupos</h2>
       
-            />
+            
       </div>
       
       
