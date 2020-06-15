@@ -1,35 +1,25 @@
 import React from "react";
-import {
-  GrupoContainer,
-  DataFinal,
-  Titulo,
-  Andamento,
-  Criador,
-  ValorMax,
-  ValorMin,
-  Participantes,
-} from "./styles";
-import { FiClock, FiXOctagon, FiCheck } from "react-icons/fi";
-function TextoAndamento(props) {
-  
-}
+import { GrupoContainer, InfoContainer } from "./styles";
+import { FiClock, FiXOctagon, FiCheck, FiInfo } from "react-icons/fi";
+import { useHistory } from "react-router-dom";
 function GrupoHome(props) {
-  
-    
-  
+  const history = useHistory();
   return (
-    <GrupoContainer>
-      <Titulo>{props.Titulo}</Titulo>
-      <Andamento>
-        <TextoAndamento statusGrupo={props.statusGrupo} />
-      </Andamento>
-      <Criador>
-        Por {props.Criador} em {props.DataCriacao}
-      </Criador>
-      <DataFinal>Data de encontro: {props.DataEncontro}</DataFinal>
-  <ValorMin>Max: R${props.ValorMax}</ValorMin>
-  <ValorMax>Min: R${props.ValorMin}</ValorMax>
-  <Participantes>Participantes:{props.Participantes}</Participantes>
+    <GrupoContainer
+      onClick={(e) => {
+        history.push(`/Grupos/${props.key}`)
+      }}
+    >
+      <h3>
+        {props.Titulo} 
+      </h3>
+      
+      <InfoContainer>
+        <p>Em {props.Dias} dias</p>
+    <p>{props.Participantes} Participantes</p>
+        <p>(Por {props.Criador})</p>
+        <FiInfo />
+      </InfoContainer>
     </GrupoContainer>
   );
 }

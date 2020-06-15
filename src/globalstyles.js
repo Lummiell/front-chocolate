@@ -8,7 +8,6 @@ export const Button = styled.button`
   border-radius: 0.4em;
   background: none;
   cursor: pointer;
-  margin-top: 1em;
   box-shadow: 0 0 0.2em rgba(0, 0, 0, 0.384);
   transition: background 100ms ease-in;
   :hover {
