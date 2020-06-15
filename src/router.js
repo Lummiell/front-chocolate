@@ -6,6 +6,7 @@ import NovoUsuario from './Pages/NovoUsuario/index.js'
 import EditarPerfil from './Pages/EditarPerfil'
 import Grupo from './Pages/Grupo'
 import Grupos from './Pages/Grupos'
+import CriarGrupo from './Pages/CriarGrupo'
 function Router(){
     
     return(
@@ -15,6 +16,7 @@ function Router(){
             <Route path='/NovoUsuario' component={NovoUsuario}/>
             <Route path='/Home' component={Home} />
             <Route path='/EditarPerfil' component={EditarPerfil}/>
+            <Route path='/CriarGrupo' component={CriarGrupo}/>
             <Route path='/Grupos' exact component={Grupos}/>
             <Route path='/Grupos/:id' component={Grupo}/>
         </Switch>

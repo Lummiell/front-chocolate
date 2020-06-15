@@ -30,8 +30,8 @@ font: 1em sans-serif;
 export const Form = styled.form`
 margin: 0 auto;
   width: 100%;
-  padding: 1em 1em 0 0;
   li {
+    margin:0;
     margin-top: 0.5em;
   }
 `

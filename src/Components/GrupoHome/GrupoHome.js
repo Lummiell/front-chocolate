@@ -7,17 +7,13 @@ function GrupoHome(props) {
   return (
     <GrupoContainer
       onClick={(e) => {
-        history.push(`/Grupos/${props.key}`)
+        history.push(`/Grupos/${props.idGrupo}`);
       }}
     >
-      <h3>
-        {props.Titulo} 
-      </h3>
-      
+      <h3>{props.Titulo}</h3>
       <InfoContainer>
         <p>Em {props.Dias} dias</p>
-    <p>{props.Participantes} Participantes</p>
-        <p>(Por {props.Criador})</p>
+        <p>{props.Participantes} Participantes</p>
         <FiInfo />
       </InfoContainer>
     </GrupoContainer>

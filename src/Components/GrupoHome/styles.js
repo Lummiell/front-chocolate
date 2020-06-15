@@ -21,6 +21,4 @@ p{
     font-size:12pt;
 }
 `
-export const Titulo = styled.div`
 
-`;

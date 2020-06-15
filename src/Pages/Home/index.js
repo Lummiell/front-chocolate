@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../Services/API";
 import { Button } from "../../globalstyles";
-import { FiEdit, FiUser, FiAtSign, FiInfo } from "react-icons/fi";
+import { FiEdit, FiUser, FiAtSign, FiInfo, FiPlusSquare } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 import { DadosContainer, ListaDados, GruposContainer } from "./styles";
 import GrupoHome from "../../Components/GrupoHome/GrupoHome";
@@ -12,10 +12,10 @@ function Home() {
   const history = useHistory();
   function DiasAteData(data) {
     const hoje = new Date();
-    const alvo = new Date(data)
-    console.log(data)
+    const alvo = new Date(data);
+    console.log(data);
     const umdia = 1000 * 60 * 60 * 24;
-    return Math.ceil((alvo - hoje) / umdia)
+    return Math.ceil((alvo - hoje) / umdia);
   }
   useEffect(() => {
     api.get(`/Alunos/${localStorage.getItem("@userid")}`).then((response) => {
@@ -55,33 +55,42 @@ function Home() {
                 history.push("/EditarPerfil");
               }}
             >
-              <FiEdit /> Editar dados
+              <FiEdit />
             </Button>
           </li>
         </ListaDados>
       </DadosContainer>
       <div></div>
-
       <h2>Seus Grupos</h2>
+      <Button onClick={()=>history.push('/CriarGrupo')}>
+        <FiPlusSquare /> Criar grupo
+      </Button>
       <GruposContainer>
-        {OwnedGroups.map(group=>{
-          return <GrupoHome
-          key={group._id}
-          Titulo={group.Titulo}
-          Criador='Você'
-          Participantes={group.Participantes.length}
-          Dias={DiasAteData(group.DataEncontro)}
-        />
+        {OwnedGroups.map((group) => {
+          return (
+            <GrupoHome
+              key={group._id}
+              idGrupo={group._id}
+              Titulo={group.Titulo}
+              Participantes={group.Participantes.length}
+              Dias={DiasAteData(group.DataEncontro)}
+            />
+          );
         })}
-        
       </GruposContainer>
       <h2>Grupos Cadastrados</h2>
       <GruposContainer>
-        <GrupoHome
-          Criador="Valeriel Gabriano"
-          Participantes="6"
-          Dias="6"
-        ></GrupoHome>
+        {UserGroups.map((group) => {
+          return (
+            <GrupoHome
+              key={group._id}
+              idGrupo={group._id}
+              Titulo={group.Titulo}
+              Participantes={group.Participantes.length}
+              Dias={DiasAteData(group.DataEncontro)}
+            />
+          );
+        })}
       </GruposContainer>
     </div>
   );

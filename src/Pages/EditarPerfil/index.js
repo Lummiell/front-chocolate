@@ -128,7 +128,7 @@ export default function EditarPerfil(){
           </li>
         </ItensForm>
       </Form>
-      <Button
+      <Button type="Submit"
         onClick={() => {
           history.push("/Home");
         }}
