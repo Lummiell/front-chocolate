@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import api from "../../Services/API";
 import { Button } from "../../globalstyles";
-import { FiEdit, FiUser, FiAtSign, FiInfo, FiPlusSquare } from "react-icons/fi";
+import { FiEdit, FiUser, FiAtSign, FiInfo, FiPlusSquare, FiSearch, FiLogOut } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
-import { DadosContainer, ListaDados, GruposContainer } from "./styles";
+import { DadosContainer, ListaDados, GruposContainer, UsuarioContainer } from "./styles";
 import GrupoHome from "../../Components/GrupoHome/GrupoHome";
 function Home() {
   const [Usuario, setUsuario] = useState({});
@@ -36,6 +36,11 @@ function Home() {
         setUserGroups(response.data);
       });
   }, []);
+  function logOut(){
+    localStorage.removeItem('@userid')
+    localStorage.removeItem('@token')
+    history.push('/')
+  }
   return (
     <div>
       <DadosContainer>
@@ -56,6 +61,15 @@ function Home() {
               }}
             >
               <FiEdit />
+            </Button>
+          </li>
+          <li>
+            <Button
+              onClick={() => {
+                logOut();
+              }}
+            >
+              <FiLogOut />
             </Button>
           </li>
         </ListaDados>
@@ -79,6 +93,9 @@ function Home() {
         })}
       </GruposContainer>
       <h2>Grupos Cadastrados</h2>
+      <Button onClick={()=>history.push('/Grupos')}>
+        <FiSearch /> Procurar Grupo
+      </Button>
       <GruposContainer>
         {UserGroups.map((group) => {
           return (
