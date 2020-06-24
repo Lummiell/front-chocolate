@@ -11,11 +11,10 @@ function GrupoHome(props) {
       }}
     >
       <h3>{props.Titulo}</h3>
-      <InfoContainer>
         <p>Em {props.Dias} dias</p>
         <p>{props.Participantes} Participantes</p>
         <FiInfo />
-      </InfoContainer>
+      
     </GrupoContainer>
   );
 }

@@ -58,3 +58,17 @@ export const ButtonForm = styled(Button)`
   text-align: center;
   width: 90%;
 `;
+
+export const LabelIconeTexto = styled.div`
+display:flex;
+align-items:center;
+*{
+  margin-right:0.2em;
+}
+`
+export const Clicavel = styled.div`
+:hover{
+  cursor:pointer;  
+}
+
+`

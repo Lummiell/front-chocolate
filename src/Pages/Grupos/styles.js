@@ -19,6 +19,8 @@ export const ListaGrupos = styled.ul`
     width:100%;
     margin:0;
     padding:0;
+   
+
     li{
         margin-top:1em;
         width:100%;
@@ -33,6 +35,29 @@ export const ListaGrupos = styled.ul`
         :hover{
             cursor:pointer;
         }
+       
     }
+
+`
+
+export const ListaPaginas = styled.ul`
+display:flex;
+align-items:center;
+
+list-style: none;
+padding: 0;
+justify-content:center;
+li{
+    margin:2px 5px;
+}
+
+`
+
+export const CenterMessage = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+height:300px;
+
 
 `

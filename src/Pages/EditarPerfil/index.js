@@ -48,7 +48,7 @@ export default function EditarPerfil(){
         setEnviando(true);
         api.put(`/Alunos/${localStorage.getItem("@userid")}`,Dados).then(response=>{
             setEnviando(false)
-            history.push('/Home')
+            history.push(`/Perfil/${localStorage.getItem("@userid")}`)
         })
     }
     function ButtonText(){
@@ -107,7 +107,7 @@ export default function EditarPerfil(){
           </li>
           <li>
             <LabelInput htmlFor="Observacoes">
-              <FiInfo /> Observações
+              <FiInfo /> Diga um pouco sobre você
             </LabelInput>
           </li>
           <li>
@@ -129,9 +129,7 @@ export default function EditarPerfil(){
         </ItensForm>
       </Form>
       <Button type="Submit"
-        onClick={() => {
-          history.push("/Home");
-        }}
+        
       >
         <FiArrowLeft/> Voltar
       </Button>

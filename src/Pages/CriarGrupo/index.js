@@ -151,10 +151,12 @@ function CriarGrupo() {
           
         </ItensForm>
       </Form>
-      <Button type="Submit"
-        
+      <Button
+        onClick={() => {
+          history.push("/Home");
+        }}
       >
-        <FiArrowLeft /> Voltar
+        <FiArrowLeft/> Voltar
       </Button>
     </NovoGrupoContainer>
   );

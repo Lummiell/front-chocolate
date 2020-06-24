@@ -1,9 +1,25 @@
 import React, { useState, useEffect } from "react";
 import api from "../../Services/API";
-import { Button } from "../../globalstyles";
-import { FiEdit, FiUser, FiAtSign, FiInfo, FiPlusSquare, FiSearch, FiLogOut } from "react-icons/fi";
+import { Button, LabelIconeTexto,Clicavel } from "../../globalstyles";
+import {
+  FiEdit,
+  FiUser,
+  FiAtSign,
+  FiInfo,
+  FiPlusSquare,
+  FiSearch,
+  FiLogOut,
+  FiHome,
+} from "react-icons/fi";
 import { useHistory } from "react-router-dom";
-import { DadosContainer, ListaDados, GruposContainer, UsuarioContainer } from "./styles";
+import {
+  DadosContainer,
+  ListaDados,
+  GruposContainer,
+  UsuarioContainer,
+  FlexTitulos,
+  Bodycontainer,
+} from "./styles";
 import GrupoHome from "../../Components/GrupoHome/GrupoHome";
 function Home() {
   const [Usuario, setUsuario] = useState({});
@@ -36,32 +52,31 @@ function Home() {
         setUserGroups(response.data);
       });
   }, []);
-  function logOut(){
-    localStorage.removeItem('@userid')
-    localStorage.removeItem('@token')
-    history.push('/')
+  function logOut() {
+    localStorage.removeItem("@userid");
+    localStorage.removeItem("@token");
+    history.push("/");
   }
   return (
     <div>
       <DadosContainer>
         <ListaDados>
-          <li>
-            <FiUser /> {Usuario.Nome}
+          <li id="Home">
+            <LabelIconeTexto>
+              <h1>
+                <FiHome /> Home
+              </h1>
+            </LabelIconeTexto>
           </li>
-          <li>
-            <FiAtSign /> {Usuario.Email}
-          </li>
-          <li>
-            <FiInfo /> {Usuario.Observacoes}
-          </li>
-          <li>
-            <Button
-              onClick={() => {
-                history.push("/EditarPerfil");
-              }}
-            >
-              <FiEdit />
-            </Button>
+          
+          <li onClick={()=>{
+            history.push(`/Perfil/${localStorage.getItem('@userid')}`)
+          }}>
+            <Clicavel>
+            <LabelIconeTexto>
+              <FiUser /> {Usuario.Nome}
+            </LabelIconeTexto>
+            </Clicavel>
           </li>
           <li>
             <Button
@@ -74,41 +89,56 @@ function Home() {
           </li>
         </ListaDados>
       </DadosContainer>
-      <div></div>
+      <Bodycontainer>
+      <FlexTitulos>
+        <Button onClick={() => history.push("/Grupos")}>
+          <FiSearch /> Procurar Grupo
+        </Button>
+        <Button onClick={() => history.push("/CriarGrupo")}>
+          <FiPlusSquare /> Criar grupo
+        </Button>
+      </FlexTitulos>
       <h2>Seus Grupos</h2>
-      <Button onClick={()=>history.push('/CriarGrupo')}>
-        <FiPlusSquare /> Criar grupo
-      </Button>
       <GruposContainer>
-        {OwnedGroups.map((group) => {
-          return (
-            <GrupoHome
-              key={group._id}
-              idGrupo={group._id}
-              Titulo={group.Titulo}
-              Participantes={group.Participantes.length}
-              Dias={DiasAteData(group.DataEncontro)}
-            />
-          );
-        })}
+        {OwnedGroups.length === 0 ? (
+          <p>Você não criou nenhum grupo ainda! Crie um grupo acima!</p>
+        ) : (
+          <>
+            {OwnedGroups.map((group) => {
+              return (
+                <GrupoHome
+                  key={group._id}
+                  idGrupo={group._id}
+                  Titulo={group.Titulo}
+                  Participantes={group.Participantes.length}
+                  Dias={DiasAteData(group.DataEncontro)}
+                />
+              );
+            })}
+          </>
+        )}
       </GruposContainer>
-      <h2>Grupos Cadastrados</h2>
-      <Button onClick={()=>history.push('/Grupos')}>
-        <FiSearch /> Procurar Grupo
-      </Button>
+      <h2>Grupos que você participa</h2>
       <GruposContainer>
-        {UserGroups.map((group) => {
-          return (
-            <GrupoHome
-              key={group._id}
-              idGrupo={group._id}
-              Titulo={group.Titulo}
-              Participantes={group.Participantes.length}
-              Dias={DiasAteData(group.DataEncontro)}
-            />
-          );
-        })}
+      {UserGroups.length === 0 ? (
+          <p>Você não entrou em nenhum grupo ainda! Procure um grupo acima!</p>
+        ) : (
+          <>
+            {UserGroups.map((group) => {
+              return (
+                <GrupoHome
+                  key={group._id}
+                  idGrupo={group._id}
+                  Titulo={group.Titulo}
+                  Participantes={group.Participantes.length}
+                  Dias={DiasAteData(group.DataEncontro)}
+                />
+              );
+            })}
+          </>
+        )}
       </GruposContainer>
+      </Bodycontainer>
     </div>
   );
 }
