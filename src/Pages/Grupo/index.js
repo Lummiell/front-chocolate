@@ -26,7 +26,7 @@ import {
   FiCheck,
   FiGift,
 } from "react-icons/fi";
-import { Button, LabelIconeTexto, Clicavel } from "../../globalstyles";
+import { Button, LabelIconeTexto } from "../../globalstyles";
 export default function Grupo() {
   const [Grupo, setGrupo] = useState({
     CriadoEm: null,
@@ -37,7 +37,6 @@ export default function Grupo() {
     Titulo: "",
     ValorMin: null,
     ValorMax: null,
-    Criador: "",
     Criador: {
       Nome: null,
       _id: null,

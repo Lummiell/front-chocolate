@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import {
-  FiUser,
-  FiLock,
-  FiAtSign,
-  FiPenTool,
   FiPlusSquare,
   FiArrowLeft,
-  FiTag,
   FiType,
   FiInfo,
   FiMinusSquare,
@@ -22,7 +17,6 @@ import {
   Button,
   ButtonForm,
   ItensForm,
-  ErrorText,
 } from "../../globalstyles";
 import { NovoGrupoContainer } from "./styles";
 function ConteudoBotao(props) {

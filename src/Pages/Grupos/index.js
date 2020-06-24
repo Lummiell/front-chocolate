@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { TextInput, Button, LabelIconeTexto } from "../../globalstyles";

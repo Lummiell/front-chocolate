@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import api from "../../Services/API";
 import { Button, LabelIconeTexto,Clicavel } from "../../globalstyles";
 import {
-  FiEdit,
   FiUser,
-  FiAtSign,
-  FiInfo,
   FiPlusSquare,
   FiSearch,
   FiLogOut,
@@ -16,7 +13,6 @@ import {
   DadosContainer,
   ListaDados,
   GruposContainer,
-  UsuarioContainer,
   FlexTitulos,
   Bodycontainer,
 } from "./styles";

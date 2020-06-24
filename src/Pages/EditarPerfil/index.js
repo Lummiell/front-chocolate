@@ -18,7 +18,7 @@ import {
   Button,
   ButtonForm,
   ItensForm,
-  ErrorText
+  
 } from "../../globalstyles";
 import { NovoUsuarioContainer } from "./styles";
 export default function EditarPerfil(){
@@ -32,7 +32,7 @@ export default function EditarPerfil(){
    const [Loading,setLoading] =useState(true) 
    const [Enviando,setEnviando] = useState(false)
    useEffect(()=>{
-        let Dados;
+        
         api.get(`/Alunos/${localStorage.getItem("@userid")}`).then(response=>{
             setDados({
                 Nome: response.data.Nome,

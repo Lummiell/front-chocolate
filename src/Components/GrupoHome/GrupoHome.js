@@ -1,6 +1,6 @@
 import React from "react";
-import { GrupoContainer, InfoContainer } from "./styles";
-import { FiClock, FiXOctagon, FiCheck, FiInfo } from "react-icons/fi";
+import { GrupoContainer } from "./styles";
+import { FiInfo } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 function GrupoHome(props) {
   const history = useHistory();
